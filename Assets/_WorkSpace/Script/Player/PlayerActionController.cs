@@ -30,27 +30,12 @@ public class PlayerActionController
 
     public void Move()
     {
-        if (_playerMove.IsPressed() && !_sprint.IsPressed())
-        {
-            _playerMoveInput = _playerMove.ReadValue<Vector2>();
-        }
-        else
-        {
-            _playerMoveInput = Vector2.zero;
-        }
-        _tr.position += new Vector3(_playerMoveInput.x, 0, _playerMoveInput.y).normalized * _moveSpeed * Time.deltaTime;
-    }
+        if (!_playerMove.IsPressed()) return;
 
-    public void Dash()
-    {
-        if (_playerMove.IsPressed() && _sprint.IsPressed())
-        {
-            _playerMoveInput = _playerMove.ReadValue<Vector2>();
-        }
-        else
-        {
-            _playerMoveInput = Vector2.zero;
-        }
-        _tr.position += new Vector3(_playerMoveInput.x, 0, _playerMoveInput.y).normalized * _moveSpeed * _sprintSpeed * Time.deltaTime;
+        _playerMoveInput = _playerMove.ReadValue<Vector2>();
+        Vector3 direction = new Vector3(_playerMoveInput.x, 0, _playerMoveInput.y).normalized;
+        float speed = _sprint.IsPressed() ? _sprintSpeed : _moveSpeed;
+
+        _tr.position += direction * speed * Time.deltaTime;
     }
 }
