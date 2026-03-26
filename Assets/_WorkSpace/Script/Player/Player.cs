@@ -1,14 +1,32 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    PlayerActionController _playerActionController;
+    PlayerStateController _playerStateController;
+    PlayerInventoryController _playerInventoryController;
+
+    PlayerInput _playerInput;
+
+    Transform _tr;
+
+    [SerializeField] float _moveSpeed;
+
+    void Awake()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+
+        _playerActionController = new(_playerInput, _moveSpeed, _tr);
+        _playerStateController = new();
+        _playerInventoryController = new();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
