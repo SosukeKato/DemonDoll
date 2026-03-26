@@ -12,12 +12,13 @@ public class Player : MonoBehaviour
     Transform _tr;
 
     [SerializeField] float _moveSpeed;
+    [SerializeField] float _sprintSpeed;
 
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
 
-        _playerActionController = new(_playerInput, _moveSpeed, _tr);
+        _playerActionController = new(_playerInput, _moveSpeed, _sprintSpeed, _tr);
         _playerStateController = new();
         _playerInventoryController = new();
     }

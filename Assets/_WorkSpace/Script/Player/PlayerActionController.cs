@@ -13,8 +13,9 @@ public class PlayerActionController
     Vector2 _playerMoveInput;
 
     float _moveSpeed;
+    float _sprintSpeed;
 
-    public PlayerActionController(PlayerInput playerinput, float moveSpeed, Transform transform)
+    public PlayerActionController(PlayerInput playerinput, float moveSpeed, float sprintSpeed, Transform transform)
     {
         _playerMove = playerinput.actions["Move"];
         _interact = playerinput.actions["Interact"];
@@ -24,11 +25,12 @@ public class PlayerActionController
         _tr = transform;
 
         _moveSpeed = moveSpeed;
+        _sprintSpeed = sprintSpeed;
     }
 
     public void Move()
     {
-        if (_playerMove.IsPressed())
+        if (_playerMove.IsPressed() && !_sprint.IsPressed())
         {
             _playerMoveInput = _playerMove.ReadValue<Vector2>();
         }
@@ -37,5 +39,18 @@ public class PlayerActionController
             _playerMoveInput = Vector2.zero;
         }
         _tr.position += new Vector3(_playerMoveInput.x, 0, _playerMoveInput.y).normalized * _moveSpeed * Time.deltaTime;
+    }
+
+    public void Dash()
+    {
+        if (_playerMove.IsPressed() && _sprint.IsPressed())
+        {
+            _playerMoveInput = _playerMove.ReadValue<Vector2>();
+        }
+        else
+        {
+            _playerMoveInput = Vector2.zero;
+        }
+        _tr.position += new Vector3(_playerMoveInput.x, 0, _playerMoveInput.y).normalized * _moveSpeed * _sprintSpeed * Time.deltaTime;
     }
 }
