@@ -38,4 +38,9 @@ public class PlayerActionController
 
         _tr.position += direction * speed * Time.deltaTime;
     }
+
+    public void Interact()
+    {
+        
+    }
 }
