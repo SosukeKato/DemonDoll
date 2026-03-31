@@ -12,6 +12,7 @@ public class PlayerActionController
 
     Vector2 _playerMoveInput;
 
+    int _inventoryAction;
     float _moveSpeed;
     float _sprintSpeed;
 
@@ -41,6 +42,23 @@ public class PlayerActionController
 
     public void Interact()
     {
-        
+        if (!_interact.WasPressedThisFrame()) return;
+    }
+
+    public void Inventory()
+    {
+        if (!_inventory.WasPressedThisFrame()) return;
+
+        _inventoryAction++;
+
+        switch (_inventoryAction % 2)
+        {
+            case 0:
+                //インベントリを閉じる処理
+                return;
+            case 1:
+                //インベントリを開く処理
+                return;
+        }
     }
 }
