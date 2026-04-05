@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
     Vector3 _rayStartPosition;
     Vector3 _rayDirection;
+    RaycastHit _raycastHit;
+
+    bool _isHit;
 
     [Header("Interact用RayCastに使用する変数")]
     [SerializeField,Tooltip("プレイヤーの目")] Camera _playerEye;
@@ -40,8 +43,20 @@ public class Player : MonoBehaviour
     void Update()
     {
         _playerActionController.Move();
+        _playerActionController.Interact();
+    }
 
+    public void AimingInterect()
+    {
         _rayStartPosition = _playerEye.transform.position;
         _rayDirection = _playerEye.transform.forward.normalized;
+
+        if (Physics.Raycast(_rayStartPosition, _rayDirection, out _raycastHit, _distance))
+        {
+            //ここでrayがヒットした対象のインタラクトされた際の処理を実行させる(未実装)
+            Debug.Log("HitObject : " + _raycastHit.collider.gameObject.name);
+        }
+
+        Debug.DrawRay(_rayStartPosition, _rayDirection * _distance, Color.red);
     }
 }
