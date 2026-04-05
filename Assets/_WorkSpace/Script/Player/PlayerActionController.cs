@@ -40,9 +40,10 @@ public class PlayerActionController
         _tr.position += direction * speed * Time.deltaTime;
     }
 
-    public void Interact()
+    public void Interact(IInteractable target)
     {
-        if (!_interact.WasPressedThisFrame()) return;
+        if (_interact.WasPressedThisFrame())
+            target?.OnInteract();
     }
 
     public void Inventory()

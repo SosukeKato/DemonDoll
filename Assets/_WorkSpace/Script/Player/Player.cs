@@ -43,20 +43,24 @@ public class Player : MonoBehaviour
     void Update()
     {
         _playerActionController.Move();
-        _playerActionController.Interact();
+        _playerActionController.Interact(GetInterectTarget());
     }
 
-    public void AimingInterect()
+    IInteractable GetInterectTarget()
     {
         _rayStartPosition = _playerEye.transform.position;
         _rayDirection = _playerEye.transform.forward.normalized;
+        Debug.DrawRay(_rayStartPosition, _rayDirection * _distance, Color.red);
 
         if (Physics.Raycast(_rayStartPosition, _rayDirection, out _raycastHit, _distance))
         {
             //ここでrayがヒットした対象のインタラクトされた際の処理を実行させる(未実装)
             Debug.Log("HitObject : " + _raycastHit.collider.gameObject.name);
+            _raycastHit.collider.TryGetComponent<IInteractable>(out IInteractable interactable);
+
+            return interactable;
         }
 
-        Debug.DrawRay(_rayStartPosition, _rayDirection * _distance, Color.red);
+        return null;
     }
 }
