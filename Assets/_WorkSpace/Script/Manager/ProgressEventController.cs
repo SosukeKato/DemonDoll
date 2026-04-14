@@ -1,16 +1,33 @@
-using UnityEngine;
-
-public class ProgressEventController : MonoBehaviour
+public class ProgressEventController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    const int _progressEventCount = 10;
+
+
+    InGameController _inGameController;
+
+    bool[] _progressEvent;
+
+    public ProgressEventController(InGameController inGameController)
     {
-        
+        _inGameController = inGameController;
+
+        _progressEvent = new bool[_progressEventCount];
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// IDを受け取り、該当イベントを回収する
+    /// </summary>
+    /// <param name="progressEventID"></param>
+    public void AdaptationProgressEventIndex(int progressEventID)
     {
-        
+        _progressEvent[progressEventID] = true;
+    }
+
+    /// <summary>
+    ///GameController下のProgressControllerに対して現在の進行度を譲渡する(このメソッド削除する可能性があります)
+    /// </summary>
+    void AssignmentProgressEventIndex()
+    {
+        _progressEvent[0] = true;
     }
 }
