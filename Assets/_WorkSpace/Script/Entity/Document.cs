@@ -1,16 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Document : Entity
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField, Header("ï∂èë")] Image _documentImage;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void OnInteract()
+    {
+        ReadDocument();
+        base.OnInteract();
+    }
+
+    void ReadDocument()
+    {
+        _documentImage.gameObject.SetActive(true);
     }
 }
