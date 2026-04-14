@@ -28,6 +28,6 @@ public class ProgressEventController
     /// </summary>
     void AssignmentProgressEventIndex()
     {
-        _progressEvent[0] = true;
+        //TODO:ProgressController‚Ö‚Ìƒtƒ‰ƒO÷“nˆ—
     }
 }
