@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour,IInteractable
 {
+    InGameController _inGameController;
+
     [NonSerialized] public int EntityID;
 
     [SerializeField,Header("フラグ管理用のID(ゲーム進行に関係のないEntityの場合は-1に設定)")] int _entityID;
+
+    void Awake()
+    {
+        _inGameController = FindAnyObjectByType<InGameController>();
+    }
 
     void Start()
     {
@@ -19,6 +26,6 @@ public class Entity : MonoBehaviour,IInteractable
 
     public virtual void OnInteract()
     {
-        //フラグ管理スクリプトにIDを渡す処理を追加する
+        _inGameController.AdaptationProgressEventIndex(EntityID);
     }
 }
