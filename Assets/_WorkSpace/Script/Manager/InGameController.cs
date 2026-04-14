@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class InGameController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    ProgressEventController _progressEventController;
+
+    int _progressEventID;
+
+    void Awake()
+    {
+        _progressEventController = new(this);
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
